@@ -260,7 +260,7 @@ void StartDefaultTask(void *argument)
   size_t counter = 0;
   for(;;)
   {
-	HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
     osDelay(25);
     HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
     size_t msg_len = snprintf(serialbuffer, MY_CDC_BUFFER_LEN, "Tick %d\r\n", counter);
