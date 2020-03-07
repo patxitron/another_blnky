@@ -257,14 +257,15 @@ void StartDefaultTask(void *argument)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-  snprintf(serialbuffer, MY_CDC_BUFFER_LEN, "Tick\r\n");
-  size_t msg_len = strlen(serialbuffer);
+  size_t counter = 0;
   for(;;)
   {
 	HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
     osDelay(25);
     HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+    size_t msg_len = snprintf(serialbuffer, MY_CDC_BUFFER_LEN, "Tick %d\r\n", counter);
     CDC_Transmit_FS((uint8_t*)serialbuffer, msg_len);
+    counter += 1;
     osDelay(975);
   }
   /* USER CODE END 5 */ 
